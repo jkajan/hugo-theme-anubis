@@ -1,0 +1,48 @@
+powered:
+  # clunky, better translation would be 
+  # "rakennettu Hugolla" lit. "built with
+  # Hugo" but that would require putting
+  # the link in a variable
+  other: "järjestelmä"
+
+theme:
+  other: "teema"
+
+readMore:
+  other: "lue lisää"
+
+toNewPosts:
+  other: "uudemmat postaukset"
+
+toOldPosts:
+  other: "vanhemmat postaukset"
+
+tag:
+  other: "tunniste"
+
+Tags:
+  other: "Tunnisteet"
+
+Posts:
+  other: "Postaukset"
+
+category:
+  other: "kategoria"
+
+Categories:
+  other: "Kategoriat"
+
+toAllTags:
+  other: "kaikki tunnisteet"
+
+toAllCategories:
+  other: "kaikki kategoriat"
+
+skipToContent:
+  other: "siirry pääsisältöön"
+
+darkTheme:
+  other: "tumma teema"
+
+lightTheme:
+  other: "vaalea teema"
