@@ -1,0 +1,44 @@
+powered:
+  other: "byggd med"
+
+theme:
+  other: "tema"
+
+readMore:
+  other: "läs mera"
+
+toNewPosts:
+  other: "till nyare inlägg"
+
+toOldPosts:
+  other: "till äldre inlägg"
+
+tag:
+  other: "tagg"
+
+Tags:
+  other: "Taggar"
+
+Posts:
+  other: "Inlägg"
+
+category:
+  other: "kategori"
+
+Categories:
+  other: "Kategorier"
+
+toAllTags:
+  other: "till alla taggar"
+
+toAllCategories:
+  other: "till alla kategorier"
+
+skipToContent:
+  other: "hoppa till huvudinnehåll"
+
+darkTheme:
+  other: "mörkt tema"
+
+lightTheme:
+  other: "ljust tema"
