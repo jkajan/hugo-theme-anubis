@@ -3,6 +3,8 @@
     {{ $targetFilename = "css/style.css"}}
 {{ else if eq .type "js" }}
     {{ $targetFilename = "js/script.js"}}
+{{ else if or (eq .type "svg") (eq .type "svg-inline") }}
+    {{ $targetFilename = "svg/img.svg" }}
 {{ end }}
 
 {{ $resource := resources.Get .filename }}
@@ -18,6 +20,10 @@
         <link rel="stylesheet" href="{{ $resource.Permalink }}" integrity="{{ $resource.Data.Integrity }}">
     {{ else if eq .type "js" }}
         <script src="{{ $resource.Permalink }}" type="text/javascript" charset="utf-8" integrity="{{ $resource.Data.Integrity }}"></script>
+    {{ else if eq .type "svg" }}
+        <object data="{{ $resource.Permalink }}" type="image/svg+xml" integrity="{{ $resource.Data.Integrity }}"></object>
+    {{ else if eq .type "svg-inline" }}
+        {{- $resource.Content | safeHTML -}}
     {{ end }}
 <!-- For backward compatibility -->
 {{ else }}
@@ -25,5 +31,7 @@
         <link rel="stylesheet" href="{{ .filename | absURL }}?rnd={{ now.Unix }}">
     {{ else if eq .type "js" }}
         <script src="{{ .filename | absURL }}?rnd={{ now.Unix }}" type="text/javascript" charset="utf-8"></script>
+    {{ else if or (eq .type "svg" ) (eq .type "svg-inline") }}
+        <svg><circle cx="0.5em" cy="0.5em" r="0.5em" fill="red"/></svg>
     {{ end }}
 {{ end }}
