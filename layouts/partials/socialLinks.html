@@ -1,0 +1,24 @@
+{{- $imgOnly:= site.Params.socialIconsOnly -}}
+{{- if $imgOnly -}}
+	<div class="image-links">
+{{- end -}}
+
+{{- range site.Params.socialLinks -}}
+	{{- if $imgOnly -}}
+		{{- if and .link .name .icon $imgOnly -}}
+			<a title={{ .name }} rel="me" href={{ .link }}>{{ partial "resource.html" (dict "context" . "type" "svg-inline" "filename" .icon ) }}</a>
+		{{- end -}}
+	{{- else -}}
+		{{- if and .link .name -}}
+			{{- if .icon -}}
+				<a title={{ .name }} rel="me" href={{ .link }}>{{ .name }} {{ partial "resource.html" (dict "context" . "type" "svg-inline" "filename" .icon ) }}</a>
+			{{- else -}}
+				<a tile={{ .name }} rel="me" href={{ .link }}>{{ .name }}</a>
+			{{- end -}}
+		{{- end -}}
+	{{- end -}}
+{{- end -}}
+
+{{- if $imgOnly -}}
+	</div>
+{{- end -}}
