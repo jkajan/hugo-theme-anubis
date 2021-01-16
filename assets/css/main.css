@@ -232,6 +232,23 @@ header nav a {
     border-bottom: thin solid var(--hr-color);
 }
 
+.bio-header {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	margin-top: 1em;
+	max-width: 100%;
+}
+
+.bio-header a {
+	margin: 0 0.5em;
+}
+
+.image-links svg {
+	width: 2em;
+	height: 2em;
+}
+
 /* Pages */
 main h1 {
     margin-top: 1em;
