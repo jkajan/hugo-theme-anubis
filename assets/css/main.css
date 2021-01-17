@@ -52,7 +52,7 @@ nav,
 section,
 summary {
     display: block;
-}	
+}    
 
 .container {
     max-width: 42em;
@@ -81,6 +81,7 @@ h3 {
 a {
     color: var(--link-color);
     text-decoration: none;
+    border-bottom: 1px solid transparent
 }
 
 a:hover,
@@ -180,13 +181,13 @@ hr {
 }
 
 svg {
-	display: inline-flex;
-	align-self: center;
-	stroke-width: 0.1em;
-	width: 1em;
-	height: 1em;
-	top: 0.125em;
-	position: relative
+    display: inline-flex;
+    align-self: center;
+    stroke-width: 0.1em;
+    width: 1em;
+    height: 1em;
+    top: 0.125em;
+    position: relative
 }
 
 /* Header */
@@ -233,21 +234,21 @@ header nav a {
 }
 
 .social-links {
-	display: flex;
-	justify-content: center;
-	flex-wrap: wrap;
-	margin-top: 1em;
-	margin-bottom: 1em;
-	max-width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    max-width: 100%;
 }
 
 .social-links a {
-	margin: 0 0.5em;
+    margin: 0 0.5em;
 }
 
 .image-links svg {
-	width: 2em;
-	height: 2em;
+    width: 2em;
+    height: 2em;
 }
 
 /* Pages */
