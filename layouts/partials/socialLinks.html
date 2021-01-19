@@ -1,24 +1,23 @@
-{{- $imgOnly:= site.Params.socialIconsOnly -}}
-{{- if $imgOnly -}}
-	<div class="image-links">
-{{- end -}}
+{{- if isset site.Params "socialiconsonly" -}}
+	{{- $imgOnly:= site.Params.socialIconsOnly -}}
+	<div class={{- print "social-links" " " -}}{{- if $imgOnly -}}image-links{{- end -}}>
 
-{{- range site.Params.socialLinks -}}
-	{{- if $imgOnly -}}
-		{{- if and .link .name .icon $imgOnly -}}
-			<a title={{ .name }} rel="me" href={{ .link }}>{{ partial "resource.html" (dict "context" . "type" "svg-inline" "filename" .icon ) }}</a>
-		{{- end -}}
-	{{- else -}}
-		{{- if and .link .name -}}
-			{{- if .icon -}}
-				<a title={{ .name }} rel="me" href={{ .link }}>{{ .name }} {{ partial "resource.html" (dict "context" . "type" "svg-inline" "filename" .icon ) }}</a>
-			{{- else -}}
-				<a tile={{ .name }} rel="me" href={{ .link }}>{{ .name }}</a>
-			{{- end -}}
+	{{- range site.Params.socialLinks -}}
+		{{/* If .icon is not set, use default */}}
+		{{- $icon := cond (isset . "icon") .icon "svg/default.svg" -}}
+
+		{{/* If .name is not set, use link URL with protocol stripped */}}
+		{{- $name := cond (isset . "name") .name (replaceRE "^http?s://" "" .link) -}}
+
+		{{/* If $imgOnly, do not print link name */}}
+		{{/* If .link is not set, print error */}}
+		{{- if and $imgOnly (isset . "link") -}}
+			<a title={{ $name }} rel="me" href={{ .link }}>{{ partial "resource.html" (dict "context" . "type" "svg-inline" "filename" $icon) }}</a>
+		{{- else if (isset . "link") -}}
+			<a title={{ $name }} rel="me" href={{ .link }}>{{ partial "resource.html" (dict "context" . "type" "svg-inline" "filename" $icon) }}{{ $name }}</a>
+		{{- else -}}
+			< no link found >
 		{{- end -}}
 	{{- end -}}
 {{- end -}}
-
-{{- if $imgOnly -}}
-	</div>
-{{- end -}}
+</div>
