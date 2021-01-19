@@ -11,7 +11,7 @@
 
 {{ if $resource }}
     {{ $resource := $resource | resources.ExecuteAsTemplate $targetFilename . }}
-    {{ if eq (getenv "HUGO_ENV") "production" | or (eq .Site.Params.env "production")  }}
+    {{ if and (eq (getenv "HUGO_ENV") "production" | or (eq .Site.Params.env "production")) (eq .type "svg") }}
         {{ $resource = $resource | resources.Minify }}
     {{ end }}
     {{ $resource = $resource | resources.Fingerprint "sha256" }}
@@ -23,7 +23,7 @@
     {{ else if eq .type "svg" }}
         <object data="{{ $resource.Permalink }}" type="image/svg+xml" integrity="{{ $resource.Data.Integrity }}"></object>
     {{ else if eq .type "svg-inline" }}
-        {{- $resource.Content | safeHTML -}}
+        {{ $resource.Content | safeHTML }}
     {{ end }}
 <!-- For backward compatibility -->
 {{ else }}
