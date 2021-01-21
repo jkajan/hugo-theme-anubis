@@ -1,0 +1,12 @@
+{{- if or (.Get 0) (.Get "link") -}}
+    {{/* If "link" is not set, use first parameter */}}
+    {{- $link := (.Get 0) -}}
+    {{- if (.Get "link") -}}
+        {{- $link = (.Get "link") -}}
+    {{- end -}}
+
+    {{/* Try to find SVG icon in "assets/svg" with regexp */}}
+    {{ $icon := resources.GetMatch (print "svg**" (.Get "icon") "*") }}
+
+    {{- partial "iconLink.html" (dict "link" $link "name" (.Get "name") "icon" $icon) -}}
+{{- end -}}

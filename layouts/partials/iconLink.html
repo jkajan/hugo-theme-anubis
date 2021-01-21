@@ -1,0 +1,21 @@
+{{- if .link -}}
+    {{/* If defaultLinkIcon is not set, use "svg/default.svg" */}}
+    {{- $defaultLinkIcon := "svg/default.svg" -}}
+    {{- if (isset site.Params "defaultlinkicon") -}}
+        {{- $defaultLinkIcon = site.Params.defaultLinkIcon -}}
+    {{- end -}}
+
+    {{/* If .icon is not set, use defaultLinkIcon */}}
+    {{- $icon := $defaultLinkIcon -}}
+    {{- if .icon -}}
+        {{- $icon = .icon -}}
+    {{- end -}}
+
+    {{/* If "name" is not set, use link URL with protocol stripped */}}
+    {{- $name := replaceRE "^http?s://" "" .link -}}
+    {{- if .name -}}
+        {{- $name = .name -}}
+    {{- end -}}
+
+	<a class="small-svg-icon" title={{ $name }} href={{ .link }}>{{ $name }}{{ partial "resource.html" (dict "context" . "type" "svg-inline" "filename" $icon) }}</a>
+{{- end -}}

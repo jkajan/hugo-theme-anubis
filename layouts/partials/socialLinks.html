@@ -1,23 +1,32 @@
-{{- if isset site.Params "socialiconsonly" -}}
-	{{- $imgOnly:= site.Params.socialIconsOnly -}}
-	<div class={{- print "social-links" " " -}}{{- if $imgOnly -}}image-links{{- end -}}>
+{{- $imgOnly:= site.Params.socialIconsOnly -}}
+{{- if $imgOnly -}}
+	<div class="social-links medium-svg-icon">
+{{- else -}}
+	<div class="social-links small-svg-icon">
+{{- end -}}
+{{- range site.Params.socialLinks -}}
+    {{/* If defaultLinkIcon is not set, use "svg/default.svg" */}}
+    {{- $defaultLinkIcon := cond (isset site.Params "defaultlinkicon" ) site.Params.defaultLinkIcon "svg/default.svg" -}}
 
-	{{- range site.Params.socialLinks -}}
-		{{/* If .icon is not set, use default */}}
-		{{- $icon := cond (isset . "icon") .icon "svg/default.svg" -}}
+    {{/* If .icon is not set, use defaultLinkIcon */}}
+    {{- $icon := cond (isset . "icon") .icon $defaultLinkIcon -}}
 
-		{{/* If .name is not set, use link URL with protocol stripped */}}
-		{{- $name := cond (isset . "name") .name (replaceRE "^http?s://" "" .link) -}}
+    {{/* If .name is not set, use link URL with protocol stripped */}}
+    {{- $name := cond (isset . "name") .name (replaceRE "^http?s://" "" .link) -}}
 
-		{{/* If $imgOnly, do not print link name */}}
-		{{/* If .link is not set, print error */}}
-		{{- if and $imgOnly (isset . "link") -}}
-			<a title={{ $name }} rel="me" href={{ .link }}>{{ partial "resource.html" (dict "context" . "type" "svg-inline" "filename" $icon) }}</a>
-		{{- else if (isset . "link") -}}
-			<a title={{ $name }} rel="me" href={{ .link }}>{{ partial "resource.html" (dict "context" . "type" "svg-inline" "filename" $icon) }}{{ $name }}</a>
-		{{- else -}}
-			< no link found >
-		{{- end -}}
-	{{- end -}}
+    {{/* If $imgOnly, do not print link name */}}
+    {{- if and $imgOnly (isset . "link") -}}
+	<a title={{ $name }} rel="me" href={{ .link }}>{{ partial "resource.html" (dict "context" . "type" "svg-inline" "filename" $icon) }}</a>
+
+    {{- else if (isset . "link") -}}
+        <a title={{ $name }} rel="me" href={{ .link }}>{{ partial "resource.html" (dict "context" . "type" "svg-inline" "filename" $icon) }}{{ $name }}</a>
+
+    {{/* If .link is not set, print error */}}
+    {{- else -}}
+		{{ . }}
+    {{- end -}}
+
+{{- else -}}
+    < define parameter "socialLinks" to use shortcode >
 {{- end -}}
 </div>

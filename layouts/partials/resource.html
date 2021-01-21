@@ -11,8 +11,10 @@
 
 {{ if $resource }}
     {{ $resource := $resource | resources.ExecuteAsTemplate $targetFilename . }}
-    {{ if and (eq (getenv "HUGO_ENV") "production" | or (eq .Site.Params.env "production")) (eq .type "svg") }}
-        {{ $resource = $resource | resources.Minify }}
+    {{ if (eq .type "css") | or (eq .type "js") }}
+        {{ if (eq (getenv "HUGO_ENV") "production") | or (eq .Site.Params.env "production") }}
+            {{ $resource = $resource | resources.Minify }}
+        {{ end }}
     {{ end }}
     {{ $resource = $resource | resources.Fingerprint "sha256" }}
 
@@ -31,7 +33,7 @@
         <link rel="stylesheet" href="{{ .filename | absURL }}?rnd={{ now.Unix }}">
     {{ else if eq .type "js" }}
         <script src="{{ .filename | absURL }}?rnd={{ now.Unix }}" type="text/javascript" charset="utf-8"></script>
-    {{ else if or (eq .type "svg" ) (eq .type "svg-inline") }}
+    {{ else if or (eq .type "svg") (eq .type "svg-inline") }}
         <svg><circle cx="0.5em" cy="0.5em" r="0.5em" fill="red"/></svg>
     {{ end }}
 {{ end }}

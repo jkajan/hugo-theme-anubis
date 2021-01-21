@@ -180,16 +180,6 @@ hr {
     height: 1px;
 }
 
-svg {
-    display: inline-flex;
-    align-self: center;
-    stroke-width: 0.1em;
-    width: 1em;
-    height: 1em;
-    top: 0.125em;
-    position: relative
-}
-
 /* Header */
 
 header {
@@ -246,9 +236,24 @@ header nav a {
     margin: 0 0.5em;
 }
 
-.image-links svg {
+.small-svg-icon svg {
+    display: inline-flex;
+    align-self: center;
+    stroke-width: 0.1em;
+    width: 1em;
+    height: 1em;
+    top: 0.125em;
+    position: relative;
+}
+
+.medium-svg-icon svg {
+    display: inline-flex;
+    align-self: center;
+    stroke-width: 0.1em;
     width: 2em;
     height: 2em;
+    top: 0.25em;
+    position: relative;
 }
 
 /* Pages */
